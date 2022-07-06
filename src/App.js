@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Layout from "./components/layout";
+import Profile from "./components/profile";
+
+// link para o JSON do user https://api.github.com/users/PkMs7
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <main>
+    <Layout>
+        <div>
+          <Profile />
+        </div>
+      <div>Repositories</div>
+      <div>Starreds</div>
+    </Layout>
+  </main>
   );
 }
 
