@@ -1,12 +1,16 @@
 import React from "react";
+import useGithub from "../hooks/github-hooks";
 import * as S from './styled'
 
 function Profile() {
+
+  const { githubState } = useGithub();
+
     return <S.Wrapper>
             <S.WrapperImage src="https://avatars.githubusercontent.com/u/100943409?v=4" alt="avatar do usuário"/>
               <S.WrapperInfoUser>
                 <div>
-                  <h1>Patrick Marques</h1>
+                  <h1>{githubState.user.name}</h1>
                   <S.WrapperUsername>
                     <h3>Username: </h3>
                     <a href="https://github.com/PkMs7" target="_blank" rel="noreferrer">PkMs7</a>

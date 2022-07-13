@@ -8,6 +8,7 @@ export const WrapperTabs = styled(Tabs)`
     margin-top: 16px;
 
 `;
+WrapperTabs.tabsRole = 'TabList';
 
 export const WrapperTabList = styled(TabList)`
 
@@ -41,7 +42,7 @@ export const WrapperTab = styled(Tab)`
     }
 
 `;
-WrapperTabList.tabsRole = 'Tab';
+WrapperTab.tabsRole = 'Tab';
 
 export const WrapperTabPanel = styled(TabPanel)`
 
@@ -50,4 +51,4 @@ export const WrapperTabPanel = styled(TabPanel)`
     box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
 
 `;
-WrapperTabList.tabsRole = 'TabPanel';
+WrapperTabPanel.tabsRole = 'TabPanel';
