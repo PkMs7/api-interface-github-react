@@ -3,9 +3,9 @@ import { GitHubContext } from "../providers/github-providers";
 
 function useGithub() {
 
-    const { githubState, getUser } = useContext(GitHubContext);
+    const { githubState, getUser, getUserRepos, getUserStarred } = useContext(GitHubContext);
 
-    return { githubState, getUser };
+    return { githubState, getUser, getUserRepos, getUserStarred };
 
 };
 

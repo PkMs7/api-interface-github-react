@@ -6,7 +6,7 @@ export const GitHubContext = createContext ({
     loading: false,
     user:{},
     repositories: [],
-    starred: []
+    starred: [],
 
 });
 
@@ -16,6 +16,7 @@ function GitHubPorvider({ children }) {
         hasUser: false,
         loading: false,
         user: {
+            id: undefined,
             avatar: undefined,
             login: undefined,
             name: undefined,
@@ -31,7 +32,7 @@ function GitHubPorvider({ children }) {
 
         repositories: [],
 
-        starred: []
+        starred: [],
 
     });
 
@@ -50,6 +51,7 @@ function GitHubPorvider({ children }) {
                 ...prevState,
                 hasUser: true,
                 user: {
+                    id: data.id,
                     avatar: data.avatar_url,
                     login: data.login,
                     name: data.name,
@@ -75,9 +77,32 @@ function GitHubPorvider({ children }) {
 
     };
 
+    const getUserRepos = (username) => {
+
+        api.get(`users/${username}/repos`).then( ({ data }) => {
+
+            setgithubState( prevState => ({
+                ...prevState,
+                repositories: data,
+            }));
+        });
+    };
+
+    const getUserStarred = (username) => {
+        api.get(`users/${username}/starred`).then(({ data }) => {
+
+          setgithubState((prevState) => ({
+            ...prevState,
+            starred: data,
+          }));
+        });
+      };
+
     const contextValue = {
         githubState,
         getUser: useCallback((username) => getUser(username), []),
+        getUserRepos: useCallback((username) => getUserRepos(username), []),
+        getUserStarred: useCallback((username) => getUserStarred(username), []),
     };
 
     return (
