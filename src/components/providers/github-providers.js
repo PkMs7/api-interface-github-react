@@ -13,10 +13,12 @@ export const GitHubContext = createContext ({
 function GitHubPorvider({ children }) {
 
     const [githubState, setgithubState] = useState({
+        hasUser: false,
         loading: false,
         user: {
+            avatar: undefined,
             login: undefined,
-            name: 'Patrick M.',
+            name: undefined,
             html_url: undefined,
             blog: undefined,
             company:undefined,
@@ -35,11 +37,20 @@ function GitHubPorvider({ children }) {
 
     const getUser = (username) => {
 
+        setgithubState((prevState) => ({
+
+            ...prevState,
+            loading: !prevState.loading
+
+        }));
+
         api.get(`users/${username}`).then( ({ data }) => {
 
             setgithubState( prevState => ({
                 ...prevState,
+                hasUser: true,
                 user: {
+                    avatar: data.avatar_url,
                     login: data.login,
                     name: data.name,
                     html_url: data.html_url,
@@ -51,8 +62,15 @@ function GitHubPorvider({ children }) {
                     public_gists: data.public_gists,
                     public_repos: data.public_repos,
                 }
-            }))
+            }));
+        }).finally(() => {
 
+            setgithubState((prevState) => ({
+
+                ...prevState,
+                loading: !prevState.loading
+    
+            }));
         });
 
     };
